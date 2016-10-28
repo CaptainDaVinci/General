@@ -80,7 +80,7 @@ int main(void)
         default:    printf("Enter the correct option");
 
     }
-
+    return 0;
 }
 
 
