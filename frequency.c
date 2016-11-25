@@ -27,7 +27,7 @@ int main(void)
                     count++;
                 }
             }
-                freq[i] = count;
+            freq[i] = count;
         }
     }
 
