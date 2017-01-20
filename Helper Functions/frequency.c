@@ -4,16 +4,21 @@
 int main(void)
 {
     int i, j, count, n;
+
     printf("Enter the size of the array : ");
     scanf("%d", &n);
+
     int *freq = malloc(n*sizeof(int));
     int *arr = malloc(n*sizeof(int));
+
     printf("Enter the elements of the array : ");
+
     for(i = 0; i < n; i++)
     {
         scanf("%d", &arr[i]);
         freq[i] = -1;
     }
+
     for(i = 0; i < n; i++)
     {
         count = 1;
@@ -30,7 +35,9 @@ int main(void)
             freq[i] = count;
         }
     }
+
     printf("ELEMENT\tFREQUENCY\n");
+
     for(i = 0; i < n; i++)
     {
         if(freq[i] != 0)

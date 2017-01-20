@@ -1,18 +1,23 @@
 #include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include <stdlib.h>
 
 int main(void)
 {
-    int num, i, f[100];
+    unsigned long long int f1 = 1, f2 = 1, f = 0;
+    int N;
     printf("Enter the number : ");
-    scanf("%d", &num);
-    f[0] = 0;
-    f[1] = 1;
-    printf("0\n1\n");
-    for (i = 2; i < num; i++)
-    {
-        f[i] = f[i-1] + f[i-2];
-        printf("%d\n", f[i]);
-    }
-    return 0;
+    scanf("%d", &N);
 
+    printf("1\n1\n");
+    for(int i = 2; i < N; i++)
+    {
+        f = f1 + f2;
+        printf("%lld\n", f);
+        f1 = f2;
+        f2 = f;
+    }
+
+    return 0;
 }

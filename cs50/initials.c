@@ -7,7 +7,9 @@ int main(void)
   char name [100];
   printf("Enter your full Name : ");
   scanf("%[^\n]s", name);
+
   printf("Your initials are : ");
+
   if (name[0] == ' ')
   {
       for (int i = 1, n = strlen(name); i < n; i++)
@@ -18,6 +20,7 @@ int main(void)
             }
       }
   }
+
   else
   {
       printf("%c.",toupper(name[0]));
@@ -29,6 +32,6 @@ int main(void)
           }
       }
   }
-  return 0;
 
+  return 0;
 }

@@ -48,7 +48,7 @@ int main(int argc, char *argv[])
     }
     else
     {
-        printf("Missing command-line arguement.\n");
+        printf("Usage : %s key\n", argv[0]);
         return 1;
     }
     return 0;
