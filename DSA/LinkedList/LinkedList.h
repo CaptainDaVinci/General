@@ -1,3 +1,5 @@
+#ifndef __LIST_H__
+#define __LIST_H__
 
 struct node
 {
@@ -6,9 +8,11 @@ struct node
 };
 struct node *head; // Global variable
 
-#include "insert.c"
-#include "insert2.c"
-#include "traverse.c"
-#include "delete.c"
-#include "reverse.c"
-#include "recursive.c"
+void delete(int n);
+void insert(int x);
+void insert2(int x, int n);
+void recursion(struct node *curr);
+void reverse();
+void traverse(void);
+
+#endif

@@ -12,6 +12,8 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 
+void dealloc(void);
+
 int main(void)
 {
     head = NULL;
@@ -62,9 +64,12 @@ int main(void)
                  break;
 
         case 4 : reverse();
+                 printf("Reversed List!\n");
                  break;
 
-        case 5 : exit(0);
+        case 5 : printf("Deallocated all memory blocks!\n");
+                 dealloc();
+                 exit(0);
 
         default : printf("ERROR-Enter a valid option\n");
     }
@@ -72,4 +77,17 @@ int main(void)
     goto repeat;
 
     return 0;
+}
+
+void dealloc(void)
+{
+    struct node *curr = head;
+    struct node *temp = NULL;
+
+    while(curr != NULL)
+    {
+        temp = curr;
+        curr = curr->link;
+        free(temp);
+    }
 }

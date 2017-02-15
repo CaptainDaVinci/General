@@ -25,15 +25,17 @@ void insert(int data);
 void traverse(void);
 void insert2(int data, int n);
 void delete(int n);
-void reverse();
+void reverse(void);
+void dealloc(void);
 
 int main(void)
 {
     int n, data, i, option;
     head = NULL;
 
-    printf("Enter the number of data to be inserted : ");
+    printf("Enter the number of data to be inserted: ");
     scanf("%d", &n);
+    printf("Enter the data: ");
 
     for(i = 0; i < n; i++)
     {
@@ -59,20 +61,22 @@ int main(void)
                  else printf("Not a valid position\n");
                  break;
 
-        case 2 : traverse();
+        case 2 : printf("List: ");
+                 traverse();
                  break;
 
         case 3 : printf("Position : ");
                  scanf("%d", &n);
-                 if(n != 0)
                  delete(n);
-                 else printf("Not a valid position\n");
                  break;
 
-        case 4 : reverse();
+        case 4 : printf("List: "); 
+                 reverse();
                  break;
 
-        case 5 : exit(0);
+        case 5 : dealloc();
+                 printf("Deallocated all memory blocks!\n");
+                 exit(0);
 
         default : printf("ERROR-Enter a valid option\n");
     }
@@ -89,23 +93,23 @@ void insert(int data)
     if(head == NULL)
     {
         head = new;
-        new -> data = data;
-        new -> next = NULL;
-        new -> previous = head;
+        new->data = data;
+        new->next = NULL;
+        new->previous = head;
         return;
     }
 
     struct node *curr = head;
 
-    while(curr -> next != NULL)
+    while(curr->next != NULL)
     {
-        curr = curr -> next;
+        curr = curr->next;
     }
 
-    curr -> next = new;
-    new -> previous = curr;
-    new -> data = data;
-    new -> next = NULL;
+    curr->next = new;
+    new->previous = curr;
+    new->data = data;
+    new->next = NULL;
 }
 
 void traverse(void)
@@ -121,7 +125,7 @@ void traverse(void)
     while(curr != NULL)
     {
         printf("%d ", curr -> data);
-        curr = curr -> next;
+        curr = curr->next;
     }
     printf("\n");
 }
@@ -142,10 +146,10 @@ void insert2(int data, int n)
     if(n == 1)
     {
         head = new;
-        curr -> previous = new;
-        new -> data = data;
-        new -> next = curr;
-        new -> previous = head;
+        curr->previous = new;
+        new->data = data;
+        new->next = curr;
+        new->previous = head;
         return;
     }
 
@@ -153,12 +157,12 @@ void insert2(int data, int n)
     {
         curr = curr -> next;
     }
-    new -> data = data;
-    prev = curr -> next;
-    curr -> next = new;
-    new -> previous = curr;
-    new -> next = prev;
-    if(prev != NULL) prev -> previous = new;
+    new->data = data;
+    prev = curr->next;
+    curr->next = new;
+    new->previous = curr;
+    new->next = prev;
+    if(prev != NULL) prev->previous = new;
 }
 
 void delete(int n)
@@ -175,31 +179,44 @@ void delete(int n)
 
     if(n == 1)
     {
-        head = curr -> next;
+        head = curr->next;
         free(curr);
         return;
     }
 
     for(i = 0; i < n - 1; i++)
     {
-        curr = curr -> next;
+        curr = curr->next;
     }
-    prev = curr -> previous;
-    prev -> next = curr -> next;
+    prev = curr->previous;
+    prev->next = curr->next;
     free(curr);
 }
 
-void reverse()
+void reverse(void)
 {
     struct node *prev = NULL;
     struct node *curr = head;
     while(curr != NULL)
     {
-        curr -> previous = curr -> next;
-        curr -> next = prev;
+        curr->previous = curr->next;
+        curr->next = prev;
         prev = curr;
-        curr = curr -> previous;
+        curr = curr->previous;
     }
     head = prev;
-    prev -> previous = head;
+    prev->previous = head;
+}
+
+void dealloc(void)
+{
+    struct node *curr = head;
+    struct node *temp = NULL;
+
+    while(curr != NULL)
+    {
+        temp = curr;
+        curr = curr->next;
+        free(temp);
+    }
 }
