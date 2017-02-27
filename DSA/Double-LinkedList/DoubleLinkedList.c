@@ -45,45 +45,43 @@ int main(void)
 
     printf("1.Insert\n2.Traverse\n3.Delete\n4.Reverse\n5.Exit\n");
 
-    repeat :
-
-    printf("\nOption   : ");
-    scanf("%d", &option);
-
-    switch(option)                  //bit of overkill :)
+    while(1)
     {
-        case 1 : printf("Data     : ");
-                 scanf("%d", &data);
-                 printf("Position : ");
-                 scanf("%d", &n);
-                 if(n != 0)
-                 insert2(data, n);
-                 else printf("Not a valid position\n");
-                 break;
+        printf("\nOption   : ");
+        scanf("%d", &option);
 
-        case 2 : printf("List: ");
-                 traverse();
-                 break;
+        switch(option)                  //bit of overkill :)
+        {
+            case 1 : printf("Data     : ");
+                     scanf("%d", &data);
+                     printf("Position : ");
+                     scanf("%d", &n);
 
-        case 3 : printf("Position : ");
-                 scanf("%d", &n);
-                 delete(n);
-                 break;
+                     if(n != 0)
+                        insert2(data, n);
+                    else
+                        printf("Not a valid position\n");
+                    break;
 
-        case 4 : printf("List: "); 
-                 reverse();
-                 break;
+            case 2 : printf("List: ");
+                     traverse();
+                     break;
 
-        case 5 : dealloc();
-                 printf("Deallocated all memory blocks!\n");
-                 exit(0);
+            case 3 : printf("Position : ");
+                     scanf("%d", &n);
+                     delete(n);
+                     break;
 
-        default : printf("ERROR-Enter a valid option\n");
+            case 4 : reverse();
+                     break;
+
+            case 5 : dealloc();
+                     printf("Deallocated all memory blocks!\n");
+                     exit(0);
+
+            default : printf("ERROR-Enter a valid option\n");
+        }
     }
-
-    goto repeat;
-
-    return 0;
 }
 
 void insert(int data)
@@ -95,16 +93,15 @@ void insert(int data)
         head = new;
         new->data = data;
         new->next = NULL;
-        new->previous = head;
+        new->previous = NULL;
+
         return;
     }
 
     struct node *curr = head;
 
     while(curr->next != NULL)
-    {
         curr = curr->next;
-    }
 
     curr->next = new;
     new->previous = curr;
@@ -127,6 +124,7 @@ void traverse(void)
         printf("%d ", curr -> data);
         curr = curr->next;
     }
+
     printf("\n");
 }
 
@@ -138,10 +136,10 @@ void insert2(int data, int n)
         return;
     }
 
+    int i;
     struct node *new = malloc(sizeof(struct node));
     struct node *curr = head;
     struct node *prev;
-    int i;
 
     if(n == 1)
     {
@@ -149,20 +147,22 @@ void insert2(int data, int n)
         curr->previous = new;
         new->data = data;
         new->next = curr;
-        new->previous = head;
+        new->previous = NULL;
+
         return;
     }
 
     for(i = 0; i < n - 2; i++)
-    {
         curr = curr -> next;
-    }
+
     new->data = data;
     prev = curr->next;
     curr->next = new;
     new->previous = curr;
     new->next = prev;
-    if(prev != NULL) prev->previous = new;
+
+    if(prev != NULL)
+        prev->previous = new;
 }
 
 void delete(int n)
@@ -185,11 +185,11 @@ void delete(int n)
     }
 
     for(i = 0; i < n - 1; i++)
-    {
         curr = curr->next;
-    }
+
     prev = curr->previous;
     prev->next = curr->next;
+    
     free(curr);
 }
 
@@ -197,6 +197,7 @@ void reverse(void)
 {
     struct node *prev = NULL;
     struct node *curr = head;
+
     while(curr != NULL)
     {
         curr->previous = curr->next;
