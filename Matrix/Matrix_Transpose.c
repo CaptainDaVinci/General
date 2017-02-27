@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "matrix.h"
 
 void transpose(int matrix[][10], int m, int n)
 {
@@ -9,7 +10,6 @@ void transpose(int matrix[][10], int m, int n)
         {
             printf("%5d", matrix[j][i]);
         }
-
         printf("\n");
     }
 }

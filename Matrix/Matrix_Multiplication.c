@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "matrix.h"
 
 void matrix_mult(int matrixA[][10], int matrixB[][10], int matrixC[][10], int m, int n, int q)
 {
@@ -16,6 +17,4 @@ void matrix_mult(int matrixA[][10], int matrixB[][10], int matrixC[][10], int m,
             }
         }
     }
-
-    print_matrix(matrixA, m, n);
 }

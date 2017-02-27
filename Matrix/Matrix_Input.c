@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "matrix.h"
 
 void matrix_input(int matrix[][10], int m, int n)
 {

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include "matrix.h"
 
 void print_matrix(int matrix[][10], int m, int n)
 {
@@ -10,5 +11,6 @@ void print_matrix(int matrix[][10], int m, int n)
         {
             printf("%4d", matrix[i][j]);
         }
+        printf("\n");
     }
 }
