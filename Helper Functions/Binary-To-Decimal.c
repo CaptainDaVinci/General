@@ -1,30 +1,25 @@
 #include <stdio.h>
-#include <math.h>
+#include <string.h>
 
-int convert(int );
+int convert(char *bin);
 
 int main(void)
 {
-    int n;
+    char bin[64];
     printf("Enter the binary number: ");
-    scanf("%d", &n);
+    scanf("%s", bin);
 
-    printf("%d\n", convert(n));
+    printf("%d\n", convert(bin));
 }
 
-int convert(int n)
+int convert(char *bin)
 {
-    int rem;
     int dec = 0;
-    int i = 0;
-
-    while(n != 0)
-    {
-        rem = n % 10;
-        n /= 10;
-        dec = dec + rem * pow(2, i);
-        i++;
-    }
+    int n = strlen(bin);
+   
+    for(int i = 1; i <= n; i++)
+        if(bin[i - 1] == '1')
+            dec += 1 << (n - i);
 
     return dec;
 }
