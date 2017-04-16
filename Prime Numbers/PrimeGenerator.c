@@ -15,7 +15,7 @@ void primeGenerator(bool *, ulld);
 
 int main(void)
 {
-    ulld N, i;
+    ulld N, k, i;
     printf("Enter the number : ");
     scanf("%lld", &N);
 
