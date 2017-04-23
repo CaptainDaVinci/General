@@ -23,6 +23,8 @@
         "typeinfo": "cpp",
         "cmath": "cpp",
         "fstream": "cpp",
-        "utility": "cpp"
+        "utility": "cpp",
+        "iomanip": "cpp",
+        "array": "cpp"
     }
 }
