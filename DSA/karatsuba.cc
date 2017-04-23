@@ -1,60 +1,57 @@
 #include <iostream>
-#include <cctype>
-#include <string>
+#include <cmath>
 
-size_t max(size_t a, size_t b)
-{
-    return (a > b) ? a : b;
-}
-
-std::string calc(std::string x, std::string y);
-std::string karatsuba(std::string x, std::string y);
+long long int karatsuba(long long int x, long long int y);
+int ndigit(long long int x, long long int y);
+long long int left(long long int x, int n);
+long long int right(long long int x, int n);
 
 int main()
 {
-    std::string x, y;
-    std::cout << "Two Operands: ";
+    int x, y;
+    std::cout << "Enter two numbers: ";
     std::cin >> x >> y;
 
-    std::cout << x + " * " + y + " = " << karatsuba(x, y) << '\n';
+    std::cout << x << " * " << y << " = "
+              << karatsuba(x, y) << '\n';
 }
 
-std::string karatsuba(std::string x, std::string y)
+long long int karatsuba(long long int x, long long int y)
 {
-    if(x.size() < 2 || y.size() < 2)
-    {
-        int a = std::stoi(x);
-        int b = std::stoi(y);
-        int c = a * b;
-        std::string res = std::to_string(c);
-
-        return res;
-    }
-
-    int digits = max(x.size(), y.size());
+    if(x < 10 || y < 10)
+        return x * y;
+    
+    int digits = ndigit(x, y);
     int n = digits / 2;
 
-    std::string a(x.begin(), x.begin() + n);
-    std::string c(y.begin(), y.begin() + n);
-    std::string b(x.begin() + n, x.end());
-    std::string d(y.begin() + n, y.end());
+    int a = left(x, n);
+    int c = left(y, n);
+    int b = right(x, n);
+    int d = right(y, n);
 
-    std::string ac = karatsuba(a, c);
-    std::string bd = karatsuba(b, d);
-    std::string tempa = std::to_string(std::stoi(a) + std::stoi(b));
-    std::string tempb = std::to_string(std::stoi(c) + std::stoi(d));
-    std::string abcd = karatsuba(tempa, tempb);
-    tempa = std::to_string(std::stoi(ac) + std::stoi(bd));
-    std::string mid = calc(abcd,tempa);
+    int ac = karatsuba(a, c);
+    int bd = karatsuba(b, d);
+    int abcd = karatsuba((a + b), (c + d));     // (a + b) * (c + d)
 
-    return std::to_string(std::stoi(ac.append(2 * n, '0')) +  std::stoi(mid.append(n, '0')) + std::stoi(bd));
+    return ac * pow(10, n * 2) + (abcd - ac - bd) * pow(10, n) + bd;
 }
 
-std::string calc(std::string x, std::string y)
+int ndigit(long long int x, long long int y)
 {
-    int a = std::stoi(x), b = std::stoi(y);
-    int c = a - b;
-    std::string res = std::to_string(c);
-    return res;
+    int nx, ny;
+
+    for(nx = 0; x; x /= 10, ++nx);
+    for(ny = 0; y; y /= 10, ++ny);
+
+    return (nx > ny) ? nx : ny;
 }
 
+long long int left(long long int x, int n)
+{
+    return x / pow(10, n);
+}
+
+long long int right(long long int x, int n)
+{
+    return x % static_cast<int>(pow(10, n));
+} 
