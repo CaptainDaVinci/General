@@ -1,10 +1,12 @@
 #include <iostream>
 #include <cmath>
 
-long long int karatsuba(long long int x, long long int y);
-int ndigit(long long int x, long long int y);
-long long int left(long long int x, int n);
-long long int right(long long int x, int n);
+using lld = long long int;
+
+lld karatsuba(lld x, lld y);
+int ndigit(lld x, lld y);
+lld left(lld x, int n);
+lld right(lld x, int n);
 
 int main()
 {
@@ -16,7 +18,7 @@ int main()
               << karatsuba(x, y) << '\n';
 }
 
-long long int karatsuba(long long int x, long long int y)
+lld karatsuba(lld x, lld y)
 {
     if(x < 10 || y < 10)
         return x * y;
@@ -36,7 +38,7 @@ long long int karatsuba(long long int x, long long int y)
     return ac * pow(10, n * 2) + (abcd - ac - bd) * pow(10, n) + bd;
 }
 
-int ndigit(long long int x, long long int y)
+int ndigit(lld x, lld y)
 {
     int nx, ny;
 
@@ -46,12 +48,12 @@ int ndigit(long long int x, long long int y)
     return (nx > ny) ? nx : ny;
 }
 
-long long int left(long long int x, int n)
+lld left(lld x, int n)
 {
     return x / pow(10, n);
 }
 
-long long int right(long long int x, int n)
+lld right(lld x, int n)
 {
     return x % static_cast<int>(pow(10, n));
 } 

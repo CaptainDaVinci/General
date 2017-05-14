@@ -1,12 +1,13 @@
-#include <iostream>
-#include <ctime>
-#include <random>
 #include <algorithm>
+#include <iostream>
+#include <vector>
+#include <random>
+#include <ctime>
 #include "sorting.h"
 
-inline void reset_arr(int *arr, const int *temp_arr, int n)
+inline void reset_arr(std::vector<int> &arr, const std::vector<int> &temp_arr)
 {
-    for (int i = 0; i < n; ++i)
+    for (int i = 0; i < arr.size(); ++i)
         arr[i] = temp_arr[i];
 }
 
@@ -20,8 +21,8 @@ int main()
     std::mt19937 mt(rd());
     std::uniform_int_distribution<int> dist(-1000, 100);
 
-    int *arr = new int[n];
-    int *temp_arr = new int[n];
+    std::vector<int> arr(n);
+    std::vector<int> temp_arr(n);
 
     for (int i = 0; i < n; ++i)
     {
@@ -35,32 +36,31 @@ int main()
 
     /*BUBBLE SORT*/
     {
-        reset_arr(arr, temp_arr, n);
+        reset_arr(arr, temp_arr);
 
         start = clock();
-        bubble_sort(arr, n);
+        bubble_sort(arr);
         end = clock();
 
-        if (!std::is_sorted(arr, arr + n))
+        if (!std::is_sorted(arr.begin(), arr.end()))
         {
             printf("Not sorted!\n");
             return 1;
         }
 
-        reset_arr(arr, temp_arr, n);
         printf("\n>> Bubble Sort O(n^2)\n");
         printf("Time Taken: %.7lf\n\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
 
     /*INSERTION SORT*/
     {
-        reset_arr(arr, temp_arr, n);
+        reset_arr(arr, temp_arr);
 
         start = clock();
-        insertion_sort(arr, n);
+        insertion_sort(arr);
         end = clock();
 
-        if (!std::is_sorted(arr, arr + n))
+        if (!std::is_sorted(arr.begin(), arr.end()))
         {
             printf("Not sorted!\n");
             return 1;
@@ -72,13 +72,13 @@ int main()
 
     /*SELECTION SORT*/
     {
-        reset_arr(arr, temp_arr, n);
+        reset_arr(arr, temp_arr);
 
         start = clock();
-        selection_sort(arr, n);
+        selection_sort(arr);
         end = clock();
 
-        if (!std::is_sorted(arr, arr + n))
+        if (!std::is_sorted(arr.begin(), arr.end()))
         {
             printf("Not sorted!\n");
             return 1;
@@ -90,28 +90,31 @@ int main()
 
      /*Standard Sorting algorithm*/
     {
+        reset_arr(arr, temp_arr);
+
         start = clock();
-        std::sort(arr, arr + n);
+        std::sort(arr.begin(), arr.end());
         end = clock();
 
-        if (!std::is_sorted(arr, arr + n))
+        if (!std::is_sorted(arr.begin(), arr.end()))
         {
             printf("Not sorted!\n");
             return 1;
         }
 
-        reset_arr(arr, temp_arr, n);
         printf(">> Introsort\n");
         printf("Time Taken: %.7lf\n\n", (double)(end - start) / CLOCKS_PER_SEC);
     }
 
     /*MERGE SORT*/
     {
+        reset_arr(arr, temp_arr);
+
         start = clock();
         merge_sort(arr, 0, n - 1);
         end = clock();
 
-        if (!std::is_sorted(arr, arr + n))
+        if (!std::is_sorted(arr.begin(), arr.end()))
         {
             printf("Not sorted!\n");
             return 1;
@@ -125,13 +128,13 @@ int main()
     {
         /*First element as pivot*/
         {
-            reset_arr(arr, temp_arr, n);
+            reset_arr(arr, temp_arr);
 
             start = clock();
             quick_sort(arr, 0, n - 1, 1);
             end = clock();
 
-            if (!std::is_sorted(arr, arr + n))
+            if (!std::is_sorted(arr.begin(), arr.end()))
             {
                 printf("Not sorted!\n");
                 return 1;
@@ -144,13 +147,13 @@ int main()
 
         /*Last element as pivot*/
         {
-            reset_arr(arr, temp_arr, n);
+            reset_arr(arr, temp_arr);
 
             start = clock();
             quick_sort(arr, 0, n - 1, 2);
             end = clock();
 
-            if (!std::is_sorted(arr, arr + n))
+            if (!std::is_sorted(arr.begin(), arr.end()))
             {
                 printf("Not sorted!\n");
                 return 1;
@@ -162,13 +165,13 @@ int main()
 
         /*Random Pivot*/
         {
-            reset_arr(arr, temp_arr, n);
+            reset_arr(arr, temp_arr);
 
             start = clock();
             quick_sort(arr, 0, n - 1, 3);
             end = clock();
 
-            if (!std::is_sorted(arr, arr + n))
+            if (!std::is_sorted(arr.begin(), arr.end()))
             {
                 printf("Not sorted!\n");
                 return 1;
@@ -178,7 +181,4 @@ int main()
             printf("\tTime Taken: %.7lf\n", (double)(end - start) / CLOCKS_PER_SEC);
         }
     }
-
-    delete[] arr;
-    delete[] temp_arr;
 }

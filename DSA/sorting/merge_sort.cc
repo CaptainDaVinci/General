@@ -1,6 +1,6 @@
 #include "sorting.h"
 
-static void merge(int *arr, int l, int m, int h)
+static void merge(std::vector<int> &arr, int l, int m, int h)
 {
     int n1 = m - l + 1;
     int n2 = h - m;
@@ -24,7 +24,7 @@ static void merge(int *arr, int l, int m, int h)
         arr[k++] = right[j++];
 }
 
-void merge_sort(int *arr, int l, int h)
+void merge_sort(std::vector<int> &arr, int l, int h)
 {
     if(l >= h)
         return ;

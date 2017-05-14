@@ -7,14 +7,14 @@ static inline void swap(int &a, int &b)
     b = temp;
 }
 
-void bubble_sort(int *arr, int n)
+void bubble_sort(std::vector<int> &arr)
 {
     bool swapped = true;
 
-    for (int i = 0; i < n - 1 && swapped; ++i)
+    for (std::size_t i = 0; i < arr.size() - 1 && swapped; ++i)
     {
         swapped = false;
-        for (int j = 0; j < n - 1 - i; ++j)
+        for (std::size_t j = 0; j < arr.size() - 1 - i; ++j)
         {
             if (arr[j] > arr[j + 1])
             {

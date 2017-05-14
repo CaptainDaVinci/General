@@ -1,8 +1,8 @@
 #include "sorting.h"
 
-void insertion_sort(int *arr, int n)
+void insertion_sort(std::vector<int> &arr)
 {
-    for(int i = 1; i < n; ++i)
+    for(std::size_t i = 1; i < arr.size(); ++i)
     {
         int key = arr[i];
         int j = i - 1;

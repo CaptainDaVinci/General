@@ -2,10 +2,13 @@
 #include <vector>
 #include <utility>
 #include <random>
-#include <climits>
+#include <climits> 
 #include <ctime>
 
 using Tuple = std::pair<std::pair<int, int>, int>;
+
+auto constexpr LOW = -100;
+auto constexpr HIGH = 100;
 
 Tuple max(const Tuple &a, const Tuple &b)
 {
@@ -28,7 +31,7 @@ Tuple maxSubArrayCrossing(const std::vector<int> &ivec, const int low, const int
     }
 
     sum = 0;
-    int maxRight = mid + 1, maxSumRight = -1000000007;
+    int maxRight = mid + 1, maxSumRight = INT_MIN;
 
     for (int i = mid + 1; i <= high; ++i)
     {
@@ -103,9 +106,6 @@ Tuple maxSubArrayBest(std::vector<int> &ivec)
         }
     }
 
-    if(start > end)
-        start = end;
-
     return std::make_pair(std::make_pair(start, end), max);
 }
 
@@ -119,7 +119,7 @@ int main()
     clock_t start, end;
     std::random_device rd;
     std::mt19937 mt(rd());
-    std::uniform_int_distribution<int> dist(-100, 100);
+    std::uniform_int_distribution<int> dist(LOW, HIGH);
 
     for (int i = 0; i < n; ++i)
     {

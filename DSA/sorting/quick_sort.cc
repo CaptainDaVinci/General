@@ -12,7 +12,7 @@ static inline void swap(int &a, int &b)
     b = temp;
 }
 
-static int partition_l(int *arr, int l, int h)
+static int partition_l(std::vector<int> &arr, int l, int h)
 {
     int pivot = arr[l];
     int p_index = l;
@@ -30,7 +30,7 @@ static int partition_l(int *arr, int l, int h)
     return p_index;
 }
 
-static int partition_h(int *arr, int l, int h)
+static int partition_h(std::vector<int> &arr, int l, int h)
 {
     int pivot = arr[h];
     int p_index = l;
@@ -48,7 +48,7 @@ static int partition_h(int *arr, int l, int h)
     return p_index;
 }
 
-static int partition_r(int *arr, int l, int h)
+static int partition_r(std::vector<int> &arr, int l, int h)
 {
     std::uniform_int_distribution<int> dist(l, h);
     int p_index = dist(mt);
@@ -70,7 +70,7 @@ static int partition_r(int *arr, int l, int h)
     return p_index;
 }
 
-void quick_sort(int *arr, int l, int h, int op)
+void quick_sort(std::vector<int> &arr, int l, int h, int op)
 {
     if (l >= h)
         return;
