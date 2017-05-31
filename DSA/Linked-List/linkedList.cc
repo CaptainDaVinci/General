@@ -11,7 +11,6 @@ List::~List()
 {
 	Node *curr = head, *prev = head;
 
-	std::cout << size() << '\n';
 	while(curr != nullptr)
 	{
 		prev = curr;
@@ -21,8 +20,6 @@ List::~List()
 	}
 	
 	head = nullptr;
-	std::cout << size() << '\n';
-
 }
 
 void List::push(int data)
