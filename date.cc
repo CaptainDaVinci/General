@@ -18,7 +18,6 @@ class Date_Range_Calculator
         int day, month, year;
     } from, to;
 
-    int dayCount;
     std::array<int, 12> calendar;
 
     bool isLeap(int y);
@@ -104,11 +103,11 @@ Date_Range_Calculator::Date_Range_Calculator(void)
     from.month = to.month = 1;
     from.year = to.year = 1900;
     calendar = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-    dayCount = 0;
 }
 
 int Date_Range_Calculator::daysPassed(void)
 {
+    int dayCount = 0;
     for (int i = from.year + 1; i < to.year; ++i)
     {
         if (isLeap(i))

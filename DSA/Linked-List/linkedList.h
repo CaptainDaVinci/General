@@ -14,11 +14,15 @@ class Node
 	friend class List;
 };
 
+/*
+	IMPORTANT:
+	This class should contain a copy and assignment constructor!
+*/
+
 class List
 {
-	Node *head;
-
 public:
+	Node *head;
 	List();
 	~List();
 
