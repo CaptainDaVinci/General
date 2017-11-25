@@ -2,7 +2,7 @@
 
 void selection_sort(std::vector<int> &arr)
 {
-    for(std::size_t i = 0; i < arr.size(); ++i)
+    for(std::size_t i = 0; i < arr.size() - 1; ++i)
     {
         int i_min = i;
         for(std::size_t j = i + 1; j < arr.size(); ++j)

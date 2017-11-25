@@ -13,8 +13,8 @@ struct Node {
     struct Node *next;
 };
 
-int size;
-struct Node *head;
+extern int size;
+extern struct Node *head;
 
 void insert(int data);
 void insertAtN(int data, int position);
@@ -23,5 +23,6 @@ void reverse(void);
 void traverse(void);
 int size_of_list(void);
 void dealloc(void);
+void sort();
 
 #endif
